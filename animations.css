@@ -1,0 +1,71 @@
+/* Animations */
+
+
+
+@keyframes slideCardUp {
+    from {
+        bottom:0px;
+        opacity:1.0;
+    }
+    to {
+        bottom:200px;
+        opacity:0.0;
+    }
+}
+@keyframes flicker {
+    0% {
+        opacity:1.0;
+    }
+    100% {
+        opacity:0.4;
+    }
+}
+@keyframes heartbeat {
+    0% {
+        height:50px;
+        width:50px;
+    }
+    60% {
+        height:50px;
+        width:50px;
+    }
+    75% {
+        height:55px;
+        width:55px;
+    }
+    100% {
+        height:50px;
+        width:50px;
+    }
+}
+@keyframes unavailableCard {
+    0% {
+        transform: rotate(0deg);
+    }
+    33% {
+        transform: rotate(15deg);
+    }
+    66% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(15deg);
+    }
+}
+
+
+
+/* Animation Classes */
+.slideCardUpClass {
+    animation-duration:0.3s;
+    animation-name:slideCardUp;
+}
+.slideCardDownClass {
+    animation-direction:reverse;
+    animation-duration:0.3s;
+    animation-name:slideCardUp;
+}
+.unavailableClass {
+    animation-duration:0.2s;
+    animation-name:unavailableCard;
+}

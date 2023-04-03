@@ -1,0 +1,5 @@
+function inputMaths() {
+
+return 'butt'
+
+};

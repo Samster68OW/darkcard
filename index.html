@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>CLOAKED</title>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <!--Icons-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <!--External-->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
+            <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation&display=swap" rel="stylesheet">
+        <!--Internal-->
+            <!--data-->
+                <script src='data/cards.js' type='text/javascript'></script>
+                <script src='data/levels.js' type='text/javascript'></script>
+            <!--documents-->
+                <script src='documents/dialogue.js' type='text/javascript'></script>
+                <!--<script src='documents/gj-js-api.js' type='text/javascript'></script>-->
+                <script src='documents/gameplay.js' type='text/javascript'></script>
+                <!--<script src='documents/player-data.js' type='text/javascript'></script>-->
+            <link href='animations.css' rel='stylesheet'>
+            <script src='dev-log.js' type='text/javascript'></script>
+            <link href='stylesheet.css' rel='stylesheet'>
+    </head>
+    <body>
+    <center>
+        <div id='area1' class='mainArea' hidden><br> <!--Main Menu-->
+            <div id="mainTitle">CLOAKED</div>
+            <div class="mainMenuList">
+                <div onclick="playGame(farthestLevel, 'campaign');" id="enterButton">Play Next Level</div><br>
+                <div onclick="loadSpace(4);">Level Select</div><br>
+                <div onclick="loadSpace(5);">Card Gallery</div>
+            </div>
+        </div>
+        <div id='area2' class='mainArea' onclick="skipDialogue();" hidden><br> <!--The Game-->
+            <div id="dialogueLocation"></div>
+            <div id="cardTableSpot"></div>
+            <div id="cardsLeftSpot"></div>
+            <table id="heartTable"><tr>
+                <td id="heart3"></td>
+                <td id="heart2"></td>
+                <td id="heart1"></td>
+            </tr></table>
+        </div>
+        <div id='area3' class='mainArea' hidden><br> <!--Game Over-->
+            <div id="gameoverTitle">Game Over!</div>
+        </div>
+        <div id='area4' class='mainArea' hidden><br> <!--Level Select-->
+            <div id="mainTitle">Level Select</div>
+            <div id="levelSelectSpot"></div>
+            <div class="mainMenuList">
+                <div onclick="loadSpace(1);">Back</div>
+            </div>
+        </div>
+        <div id='area5' class='mainArea' hidden><br> <!--Card Gallery-->
+            <div id="mainTitle">Card Gallery</div>
+            <div id="cardGallerySpot"></div>
+            <div class="mainMenuList">
+                <div onclick="loadSpace(1);">Back</div>
+            </div>
+        </div>
+
+
+
+        <span id="fontLoader" style="color:black;">Font loader</span>
+    </center>
+        <script type='text/javascript'>
+
+
+
+var farthestLevel = 0;
+
+
+
+$(document).ready(function(){
+    farthestLevel = 6;
+    setTimeout(function(){
+        $('#fontLoader').fadeOut(0);
+        loadSpace(1);
+    },500);
+});
+function loadSpace(num) {
+    // Check Level
+        if (currentLevel > farthestLevel) {
+            farthestLevel = currentLevel;
+        }
+    // Specifics
+        switch (num) {
+            case 1:
+                if (farthestLevel >= level.length) {
+                    $('#enterButton').html(`Replay Final Level`);
+                }
+                else if (farthestLevel === 0) {
+                    $('#enterButton').html(`Start Game`);
+                }
+                else {
+                    $('#enterButton').html(`Play Next Level`);
+                }
+                break;
+            case 4: generateLevelSelectScreen(); break;
+            case 5: generateCardGalleryScreen(); break;
+        }
+    // General
+        $('.mainArea').fadeOut(0);
+        $('#area' + num).fadeIn(0);
+};
+
+
+
+function generateLevelSelectScreen() {
+    var display = `<table id='levelSelectTable'>`;
+    for (var a=0; a<farthestLevel; a++) {
+        display += `<tr><td onclick='playGame(${a},"levelselect");'>${level[a].name}</td></tr>`;
+    }
+    display += `</table>`;
+    $('#levelSelectSpot').html(display);
+};
+function generateCardGalleryScreen() {
+    var display = `<table id='cardGalleryTable'>`;
+    for (var a=0; a<card.length; a++) {
+        if (farthestLevel > card[a].unlock) {
+            display += `<tr><td><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
+        }
+    }
+    display += `</table>`;
+    $('#cardGallerySpot').html(display);
+};
+
+
+        </script>
+    </body>
+</html>
