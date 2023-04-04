@@ -4,69 +4,46 @@
 
 const card = [
     { // TODO
-        name:"Art",
-        color:"Blue",
-        desc:"Restores two sanity points.",
-        unlock:20
+        name:"Art", color:"Blue", desc:"Restores two sanity points.",
+        curse:"Flower" // TODO
     },
     {
-        name:"Bandage",
-        color:"Green",
-        desc:"Prevents bleeding.",
-        unlock:6
+        name:"Bandage", color:"Green", desc:"Prevents bleeding.",
+        curse:"Bleed"
     },
     {
-        name:"Bleed",
-        color:"Red",
-        desc:"Deals one heart of damage after three turns.",
-        unlock:5
+        name:"Bleed", color:"Red", desc:"Deals one heart of damage after three turns.",
+        curse:"Bandage"
     },
     {
-        name:"Burn",
-        color:"Orange",
-        desc:"Burns your entire hand of cards.",
-        unlock:2
+        name:"Burn", color:"Orange", desc:"Burns your entire hand of cards.",
+        curse:"Flower" // TODO
     },
     {
-        name:"Flower",
-        color:"Yellow",
-        desc:"Does nothing.",
-        unlock:0
+        name:"Flower", color:"Yellow", desc:"Does nothing.",
+        curse:"Flower" // TODO
     },
     {
-        name:"Heal",
-        color:"Green",
-        desc:"Restores one heart.",
-        unlock:1
+        name:"Heal", color:"Green", desc:"Restores one heart.",
+        curse:"Knife"
     },
     {
-        name:"Key",
-        color:"Green",
-        desc:"Unlocks all locked card slots.",
-        unlock:4
+        name:"Key", color:"Green", desc:"Unlocks all locked card slots.",
+        curse:"Lock"
     },
     {
-        name:"Knife",
-        color:"Red",
-        desc:"Deals one heart of damage.",
-        unlock:1
+        name:"Knife", color:"Red", desc:"Deals one heart of damage.",
+        curse:"Heal"
     },
     {
-        name:"Lock",
-        color:"Red",
-        desc:"Locks the current card slot for three turns.",
-        unlock:3
+        name:"Lock", color:"Red", desc:"Locks the current card slot for three turns.",
+        curse:"Key"
     },
     { // TODO
-        name:"ThumbsUp",
-        color:"Blue",
-        desc:"Maintains sanity.",
-        unlock:20
+        name:"ThumbsUp", color:"Blue", desc:"Maintains sanity.",
+        curse:"Flower" // TODO
     }
 ];
-// The 'unlock' attribute shows at what level the card is unlocked in the gallery.
-// When this number is surpassed, the card is unlocked.
-// Set to '-1' if you want it to be unlocked by default.
 
 
 
@@ -90,7 +67,6 @@ function cardAction(slot, cardName) {
             if (playerStat.feature.health === false) {return;}
             playerStat.hearts++;
             if (playerStat.hearts > 3) {playerStat.hearts = 3;}
-            //playerStat.bleeding = 0;
             break;
         case "Key":
             for (var a=0; a<playerHand.length; a++) {

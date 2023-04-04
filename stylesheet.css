@@ -50,6 +50,15 @@ center {
 
 
 /* Level Select Screen */
+#playlistSelectSpot {
+    border:2px solid grey;
+    bottom:30px;
+    height:350px;
+    left:200px;
+    overflow-y:scroll;
+    position:absolute;
+    width:650px;
+}
 #levelSelectSpot {
     border:2px solid grey;
     bottom:30px;

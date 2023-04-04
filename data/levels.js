@@ -2,9 +2,26 @@
 
 
 
-const level = [
+var playlist = [];
+function buildPlaylists() {
+    playlist = [
+
+        baseCampaign,
+        basePuzzles
+        
+    ];
+}
+
+
+
+const baseCampaign = [
     {
-        name:"Tutorial",
+        name:"Campaign",
+        author:"Half a Man Games",
+        gameMode:"campaign"
+    },
+    {
+        name:"Cards",
         dialogue:{
             start:[
                 "Welcome.",
@@ -30,7 +47,7 @@ const level = [
         feature:{health:false}
     },
     {
-        name:"Level 1 - Knife",
+        name:"Knife",
         dialogue:{
             start:[
                 "This time, the cards are a bit more dangerous.",
@@ -52,7 +69,7 @@ const level = [
         feature:{health:true}
     },
     {
-        name:"Level 2 - Burn",
+        name:"Burn",
         dialogue:{
             start:[
                 "Now I'm giving you a little more firepower.",
@@ -75,7 +92,7 @@ const level = [
         feature:{health:true}
     },
     {
-        name:"Level 3 - Lock",
+        name:"Lock",
         dialogue:{
             start:[
                 "I was reading an interesting story the other day.",
@@ -102,7 +119,7 @@ const level = [
         feature:{health:true}
     },
     {
-        name:"Level 4 - Key",
+        name:"Key",
         dialogue:{
             start:[
                 "Beans"
@@ -125,7 +142,7 @@ const level = [
         feature:{health:true}
     },
     {
-        name:"Level 5 - Bleed",
+        name:"Bleed",
         dialogue:{
             start:[
                 "Beans"
@@ -149,7 +166,7 @@ const level = [
         feature:{health:true}
     },
     {
-        name:"Level 6 - Bandage",
+        name:"Bandage",
         dialogue:{
             start:[
                 "Beans"
@@ -176,6 +193,36 @@ const level = [
 
 
 
-
-// Set to true to enable levels past level 10.
-const enableCustomLevels = false;
+const basePuzzles = [
+    {
+        name:"Puzzles",
+        author:"Half a Man Games",
+        gameMode:"puzzle"
+    },
+    {
+        name:"Puzzle 1",
+        dialogue:{
+            start:[
+                "Welcome.",
+                "The rules of the game are simple...",
+                "Survive the cards.",
+                "I will deal you three cards at a time.",
+                "Click on a card to play it.",
+                "Once you have successfully cleared all of the cards, you win.",
+                "Good luck."
+            ],
+            end:[
+                "Well done.",
+                "However, this is only the beginning."
+            ]
+        },
+        deck:[
+            ["Art", 2],
+            ["Flower", 3],
+            ["Heal", 3],
+            ["ThumbsUp", 2]
+        ],
+        shuffle:true,
+        feature:{health:false}
+    }
+];

@@ -4,7 +4,7 @@
 
 // Variables
 var transcript;
-var wordSpeed = 30;
+const wordSpeed = 30;
 var currentID;
 var currentPhrase;
 var dialoguePlaying = false;
@@ -14,8 +14,8 @@ var dialogueType;
 
 function playDialogue(type) {
     dialogueArea = true;
-    if (type === 'start') {transcript = level[currentLevel].dialogue.start;}
-    else if (type === 'end') {transcript = level[currentLevel].dialogue.end;}
+    if (type === 'start') {transcript = level.dialogue.start;}
+    else if (type === 'end') {transcript = level.dialogue.end;}
     dialogueType = type;
     currentID = 0;
     currentPhrase = "";
@@ -43,7 +43,7 @@ function skipDialogue() {
         if (currentID === transcript.length-1) {
             $('#dialogueLocation').html('');
             setTimeout(function(){
-                done();
+                doneWithDialogue();
             },1000);
         }
         else {
@@ -57,25 +57,5 @@ function skipDialogue() {
         dialoguePlaying = false;
         currentPhrase = transcript[currentID];
         placeLetter();
-    }
-};
-
-
-
-function done() {
-    dialogueArea = false;
-    if (dialogueType === 'start') {dealCards();}
-    else if (dialogueType === 'end') {
-        if (currentLevel !== level.length-1) {
-            currentLevel++;
-            if (currentMode === 'campaign') {playGame(currentLevel, 'campaign');}
-            else if (currentMode === 'levelselect') {backToMenu('win');}
-        }
-        else {
-            if (currentLevel === level.length-1) {
-                currentLevel++;
-            }
-            backToMenu('win');
-        }
     }
 };

@@ -2,8 +2,12 @@
 
 
 
-// Variables
+// Big Variables
+var currentPlaylist;
 var currentLevel;
+var level;
+
+// Round Variables
 var currentDeck;
 var playerHand;
 var playerstat;
@@ -12,24 +16,24 @@ var currentMode;
 
 
 
-function playGame(selectedLevel, mode) {
+function playGame(selectedLevel) {
     // Setup
-        if (selectedLevel >= level.length) {selectedLevel = level.length-1;}
         currentLevel = selectedLevel;
-        currentMode = mode;
+        level = playlist[currentPlaylist][currentLevel];
+        currentMode = playlist[currentPlaylist].gameMode;
         playerStat = {
             bleeding:0,
-            feature:level[currentLevel].feature,
+            feature:level.feature,
             hearts:3,
-            lock:[0,0,0]
+            lock
         }
         for (var b=0; b<handSize; b++) {playerStat.lock.push(0);}
         setupFeatures();
     // Build Card Deck
         currentDeck = [];
-        for (var a=0; a<level[currentLevel].deck.length; a++) {
-            for (var b=0; b<level[currentLevel].deck[a][1]; b++) {
-                currentDeck.push(level[currentLevel].deck[a][0]);
+        for (var a=0; a<level.deck.length; a++) {
+            for (var b=0; b<level.deck[a][1]; b++) {
+                currentDeck.push(level.deck[a][0]);
             }
         }
         currentDeck = shuffle(currentDeck);
@@ -139,7 +143,6 @@ function playCard(slot) {
     // Check lock
         if (playerStat.lock[slot] > 0) {
             $(`#card${slot}`).addClass('unavailableClass');
-            console.log(slot);
             setTimeout(function(){
                 $(`#card${slot}`).removeClass('unavailableClass');
             },200);
@@ -168,7 +171,6 @@ function updateFeatures() {
             }
         }
 };
-
 function checkEndConditions() {
     var gameOver = false;
     // Lower bleeding
@@ -201,11 +203,24 @@ function checkEndConditions() {
 
 
 
+function doneWithDialogue() {
+    dialogueArea = false;
+    if (dialogueType === 'start') {dealCards();}
+    else if (dialogueType === 'end') {
+        if (farthestLevel[currentPlaylist] === currentLevel) {
+            farthestLevel[currentPlaylist]++;
+            if (farthestLevel[currentPlaylist] >= playlist[currentPlaylist].length) {
+                farthestLevel[currentPlaylist] = playlist[currentPlaylist].length - 1;
+            }
+        }
+        backToMenu('win');
+    }
+};
 function backToMenu(state) {
     if (state === 'win') {
         $('#area2').fadeOut(2000);
         setTimeout(function(){
-            loadSpace(1);
+            loadSpace(4);
         },3000);
     }
     else if (state === 'lose') {
@@ -221,4 +236,3 @@ function backToMenu(state) {
         },1000);
     }
 };
-    

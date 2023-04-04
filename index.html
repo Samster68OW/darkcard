@@ -28,8 +28,7 @@
         <div id='area1' class='mainArea' hidden><br> <!--Main Menu-->
             <div id="mainTitle">CLOAKED</div>
             <div class="mainMenuList">
-                <div onclick="playGame(farthestLevel, 'campaign');" id="enterButton">Play Next Level</div><br>
-                <div onclick="loadSpace(4);">Level Select</div><br>
+                <div onclick="loadSpace(6);">Play Game</div><br>
                 <div onclick="loadSpace(5);">Card Gallery</div>
             </div>
         </div>
@@ -47,15 +46,22 @@
             <div id="gameoverTitle">Game Over!</div>
         </div>
         <div id='area4' class='mainArea' hidden><br> <!--Level Select-->
-            <div id="mainTitle">Level Select</div>
+            <div id="mainTitle">Select Level</div>
             <div id="levelSelectSpot"></div>
             <div class="mainMenuList">
-                <div onclick="loadSpace(1);">Back</div>
+                <div onclick="loadSpace(6);">Back</div>
             </div>
         </div>
         <div id='area5' class='mainArea' hidden><br> <!--Card Gallery-->
             <div id="mainTitle">Card Gallery</div>
             <div id="cardGallerySpot"></div>
+            <div class="mainMenuList">
+                <div onclick="loadSpace(1);">Back</div>
+            </div>
+        </div>
+        <div id='area6' class='mainArea' hidden><br> <!--Playlist Select-->
+            <div id="mainTitle">Select Playlist</div>
+            <div id="playlistSelectSpot"></div>
             <div class="mainMenuList">
                 <div onclick="loadSpace(1);">Back</div>
             </div>
@@ -69,12 +75,16 @@
 
 
 
-var farthestLevel = 0;
+var farthestLevel = [];
 
 
 
 $(document).ready(function(){
-    farthestLevel = 6;
+    buildPlaylists();
+    for (var i=0; i<playlist.length; i++) {
+        farthestLevel.push(1);
+    }
+    farthestLevel[0] = 7;
     setTimeout(function(){
         $('#fontLoader').fadeOut(0);
         loadSpace(1);
@@ -87,19 +97,9 @@ function loadSpace(num) {
         }
     // Specifics
         switch (num) {
-            case 1:
-                if (farthestLevel >= level.length) {
-                    $('#enterButton').html(`Replay Final Level`);
-                }
-                else if (farthestLevel === 0) {
-                    $('#enterButton').html(`Start Game`);
-                }
-                else {
-                    $('#enterButton').html(`Play Next Level`);
-                }
-                break;
             case 4: generateLevelSelectScreen(); break;
             case 5: generateCardGalleryScreen(); break;
+            case 6: generatePlaylistScreen(); break;
         }
     // General
         $('.mainArea').fadeOut(0);
@@ -110,8 +110,8 @@ function loadSpace(num) {
 
 function generateLevelSelectScreen() {
     var display = `<table id='levelSelectTable'>`;
-    for (var a=0; a<farthestLevel; a++) {
-        display += `<tr><td onclick='playGame(${a},"levelselect");'>${level[a].name}</td></tr>`;
+    for (var a=1; a<farthestLevel[currentPlaylist]+1; a++) {
+        display += `<tr><td onclick='playGame(${a});'>${a} - ${playlist[currentPlaylist][a].name}</td></tr>`;
     }
     display += `</table>`;
     $('#levelSelectSpot').html(display);
@@ -119,12 +119,21 @@ function generateLevelSelectScreen() {
 function generateCardGalleryScreen() {
     var display = `<table id='cardGalleryTable'>`;
     for (var a=0; a<card.length; a++) {
+        // TODO: This needs to be changed
         if (farthestLevel > card[a].unlock) {
             display += `<tr><td><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
         }
     }
     display += `</table>`;
     $('#cardGallerySpot').html(display);
+};
+function generatePlaylistScreen() {
+    var display = `<table id='levelSelectTable'>`;
+    for (var a=0; a<playlist.length; a++) {
+        display += `<tr><td onclick='currentPlaylist=${a}; loadSpace(4);'>${playlist[a][0].name} by ${playlist[a][0].author}</td></tr>`;
+    }
+    display += `</table>`;
+    $('#playlistSelectSpot').html(display);
 };
 
 
