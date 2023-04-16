@@ -69,3 +69,120 @@
     animation-duration:0.2s;
     animation-name:unavailableCard;
 }
+
+
+
+/* Knife Animations */
+#enemyKnife {
+    background-image:url("images/card/knife.png");
+    background-size:100% 100%;
+    bottom:75px;
+    height:100px;
+    position:absolute;
+    right:250px;
+    width:100px;
+}
+/* Hover */
+    .knifeHoverClass {
+        animation-direction:alternate;
+        animation-duration:1.2s;
+        animation-iteration-count:infinite;
+        animation-name:knifeHover;
+    }
+    @keyframes knifeHover {
+        0% {
+            bottom:75px;
+            transform: rotate(0deg);
+        }
+        100% {
+            bottom:50px;
+            transform: rotate(-20deg);
+        }
+    }
+/* Attack */
+    .knifeAttackClass {
+        animation-duration:0.3s;
+        animation-iteration-count:1;
+        animation-name:knifeAttack;
+        animation-timing-function: linear;
+    }
+    @keyframes knifeAttack {
+        from {
+            bottom:40px;
+            right:350px;
+            transform: rotate(-70deg);
+        }
+        to {
+            bottom:40px;
+            right:200px;
+            transform: rotate(-160deg);
+        }
+    }
+
+
+
+/* Eye Animations */
+#leftEye {
+    background-image:url("images/card/stress.png");
+    background-size:100% 100%;
+    height:50px;
+    position:absolute;
+    left:380px;
+    top:190px;
+    width:50px;
+}
+#rightEye {
+    background-image:url("images/card/stress.png");
+    background-size:100% 100%;
+    height:50px;
+    position:absolute;
+    right:380px;
+    top:190px;
+    width:50px;
+}
+/* Shake */
+    .leftEyeShakeClass {
+        animation-duration:2.0s;
+        animation-iteration-count:infinite;
+        animation-name:eyeShake;
+        animation-timing-function: linear;
+    }
+    .rightEyeShakeClass {
+        animation-direction:reverse;
+        animation-duration:2.0s;
+        animation-iteration-count:infinite;
+        animation-name:eyeShake;
+        animation-timing-function: linear;
+    }
+    @keyframes eyeShake {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+/* Bulge */
+    .eyeBulgeClass {
+        animation-duration:0.6s;
+        animation-iteration-count:1;
+        animation-name:eyeBulge;
+        animation-timing-function: linear;
+    }
+    @keyframes eyeBulge {
+        0% {
+            height:50px;
+            top:190px;
+            width:50px;
+        }
+        5% {
+            height:65px;
+            top:180px;
+            width:65px;
+        }
+        100% {
+            height:50px;
+            top:190px;
+            width:50px;
+        }
+    }

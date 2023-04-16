@@ -44,7 +44,7 @@ const baseCampaign = [
             ["ThumbsUp", 2]
         ],
         shuffle:true,
-        feature:{health:false}
+        feature:{health:false, sanity:false}
     },
     {
         name:"Knife",
@@ -66,7 +66,7 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:false}
     },
     {
         name:"Burn",
@@ -89,7 +89,7 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:false}
     },
     {
         name:"Lock",
@@ -112,11 +112,11 @@ const baseCampaign = [
             ["Flower", 5],
             ["Heal", 3],
             ["Knife", 6],
-            ["Lock",2],
+            ["Lock", 2],
             ["ThumbsUp", 4]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:false}
     },
     {
         name:"Key",
@@ -135,11 +135,11 @@ const baseCampaign = [
             ["Heal", 3],
             ["Key", 5],
             ["Knife", 6],
-            ["Lock",5],
+            ["Lock", 5],
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:false}
     },
     {
         name:"Bleed",
@@ -153,17 +153,17 @@ const baseCampaign = [
         },
         deck:[
             ["Art", 4],
+            ["Bleed", 5],
             ["Burn", 5],
             ["Flower", 4],
             ["Heal", 5],
             ["Key", 3],
             ["Knife", 3],
-            ["Lock",3],
-            ["ThumbsUp", 3],
-            ["Bleed", 5]
+            ["Lock", 3],
+            ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:false}
     },
     {
         name:"Bandage",
@@ -177,17 +177,90 @@ const baseCampaign = [
         },
         deck:[
             ["Art", 4],
+            ["Bandage", 5],
+            ["Bleed", 6],
+            ["Burn", 5],
+            ["Flower", 4],
+            ["Heal", 5],
+            ["Key", 5],
+            ["Knife", 3],
+            ["Lock", 3]
+        ],
+        shuffle:true,
+        feature:{health:true, sanity:false}
+    },
+    {
+        name:"Art",
+        dialogue:{
+            start:[
+                "Beans"
+            ],
+            end:[
+                "Beans"
+            ]
+        },
+        deck:[
+            ["Art", 5],
+            ["Bandage", 6],
+            ["Bleed", 6],
             ["Burn", 5],
             ["Flower", 4],
             ["Heal", 5],
             ["Key", 3],
             ["Knife", 3],
-            ["Lock",3],
-            ["ThumbsUp", 3],
-            ["Bleed", 5]
+            ["Lock", 3]
         ],
         shuffle:true,
-        feature:{health:true}
+        feature:{health:true, sanity:true}
+    },
+    {
+        name:"Thumbs Up",
+        dialogue:{
+            start:[
+                "Beans"
+            ],
+            end:[
+                "Beans"
+            ]
+        },
+        deck:[
+            ["Bandage", 6],
+            ["Bleed", 6],
+            ["Burn", 5],
+            ["Flower", 4],
+            ["Heal", 5],
+            ["Key", 5],
+            ["Knife", 3],
+            ["Lock", 3],
+            ["ThumbsUp", 8]
+        ],
+        shuffle:true,
+        feature:{health:true, sanity:true}
+    },
+    {
+        name:"Stress",
+        dialogue:{
+            start:[
+                "Beans"
+            ],
+            end:[
+                "Beans"
+            ]
+        },
+        deck:[
+            ["Bandage", 7],
+            ["Bleed", 8],
+            ["Burn", 6],
+            ["Flower", 2],
+            ["Heal", 5],
+            ["Key", 4],
+            ["Knife", 3],
+            ["Lock", 4],
+            ["Stress", 3],
+            ["ThumbsUp", 8]
+        ],
+        shuffle:true,
+        feature:{health:true, sanity:true, curses:true}
     }
 ];
 
@@ -200,29 +273,43 @@ const basePuzzles = [
         gameMode:"puzzle"
     },
     {
-        name:"Puzzle 1",
+        name:"Bleed Chaining", // TODO
         dialogue:{
             start:[
-                "Welcome.",
-                "The rules of the game are simple...",
-                "Survive the cards.",
-                "I will deal you three cards at a time.",
-                "Click on a card to play it.",
-                "Once you have successfully cleared all of the cards, you win.",
-                "Good luck."
+                "(Click to begin.)"
             ],
             end:[
-                "Well done.",
-                "However, this is only the beginning."
+                "Well done."
             ]
         },
         deck:[
-            ["Art", 2],
-            ["Flower", 3],
-            ["Heal", 3],
-            ["ThumbsUp", 2]
+            ["Bleed", 3],
+            ["Bandage", 1],
+            ["Bleed", 2],
+            ["Bandage", 1],
+            ["Flower", 3]
+        ],
+        shuffle:false,
+        feature:{health:true, sanity:false}
+    },
+    {
+        name:"Testing", // TODO
+        dialogue:{
+            start:[
+                "(Click to begin.)"
+            ],
+            end:[
+                "Well done."
+            ]
+        },
+        deck:[
+            ["Bleed", 3],
+            ["Bandage", 1],
+            ["Bleed", 2],
+            ["Bandage", 1],
+            ["Flower", 5]
         ],
         shuffle:true,
-        feature:{health:false}
+        feature:{health:true, sanity:false}
     }
 ];

@@ -2,25 +2,18 @@ To-Do List
 
 
 
-Next Levels:
-- Level 7: Bandage card
-- Level 8: Sanity Meter and Thumbs Up card
-- Level 9: Art card
-- Level 10: Card Curse (Every 5 turns, a card is modified to be worse.), no new card
-
-
-TODO:
-- Card Gallery - Auto-detect cards across levels in different playlists (index.html)
-- Several cards need to be programmed (cards.js)
+Currently
+- Level 10: Card Curse (Every 5 turns or so, a card is modified to be worse.)
 - Write dialogue for campaign
 
 
 Animations to improve:
-- Add animations to Heal and Hurt
-- Add better Burn animation
-- Fix card animations when spamming them
+- Fix card animations when the round first starts
 - Losing animation
+- Curse animation
 
 
 Future Projects:
 - Puzzle campaign
+- Sound Effects
+- More statistics
