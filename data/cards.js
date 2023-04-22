@@ -3,50 +3,18 @@
 
 
 const card = [
-    {
-        name:"Art", color:"Blue", desc:"Restores five sanity points.",
-        curse:"Stress"
-    },
-    {
-        name:"Bandage", color:"Green", desc:"Prevents bleeding.",
-        curse:"Bleed"
-    },
-    {
-        name:"Bleed", color:"Red", desc:"Deals one heart of damage after three turns.",
-        curse:"Bandage"
-    },
-    {
-        name:"Burn", color:"Orange", desc:"Burns your entire hand of cards.",
-        curse:"Lock"
-    },
-    {
-        name:"Flower", color:"Yellow", desc:"Does nothing.",
-        curse:"Flower"
-    },
-    {
-        name:"Heal", color:"Green", desc:"Restores one heart.",
-        curse:"Knife"
-    },
-    {
-        name:"Key", color:"Green", desc:"Unlocks all locked card slots.",
-        curse:"Lock"
-    },
-    {
-        name:"Knife", color:"Red", desc:"Deals one heart of damage.",
-        curse:"Heal"
-    },
-    {
-        name:"Lock", color:"Red", desc:"Locks the current card slot for three turns.",
-        curse:"Key"
-    },
-    {
-        name:"Stress", color:"Red", desc:"Decreases sanity by two points.",
-        curse:"Art"
-    },
-    {
-        name:"ThumbsUp", color:"Blue", desc:"Restores two sanity points.",
-        curse:"Stress"
-    }
+    {name:"Art", color:"Baby Blue", desc:"Restores five sanity points."},
+    {name:"Bandage", color:"Green", desc:"Prevents bleeding."},
+    {name:"Bleed", color:"Red", desc:"Deals one heart of damage after three turns."},
+    {name:"Burn", color:"Brown", desc:"Burns your entire hand of cards."},
+    {name:"Flower", color:"Yellow", desc:"Does nothing."},
+    {name:"Heal", color:"Green", desc:"Restores one heart."},
+    {name:"Key", color:"Green", desc:"Unlocks all locked card slots."},
+    {name:"Knife", color:"Red", desc:"Deals one heart of damage."},
+    {name:"Lock", color:"Red", desc:"Locks the current card slot for three turns."},
+    {name:"Omen", color:"Red", desc:"If left unplayed, transforms into a Knife."},
+    {name:"Stress", color:"Red", desc:"Decreases sanity by two points."},
+    {name:"ThumbsUp", color:"Baby Blue", desc:"Restores two sanity points."}
 ];
 
 
@@ -100,6 +68,9 @@ function cardAction(slot, cardName) {
         case "Lock":
             playerStat.lock[slot] = 4;
             break;
+        case "Omen":
+            // This card does nothing when it is played. It transforms into a Knife if left unattended.
+            break;
         case "Stress":
             if (playerStat.feature.sanity === false) {return;}
             playerStat.sanity -= 1;
@@ -128,9 +99,9 @@ function cardAction(slot, cardName) {
 
 function setCardColor(colorID) {
     switch (colorID) {
-        case "Blue": return "rgba(59,97,191,0.5)"; break;
+        case "Brown": return "rgba(143,73,3,0.9)"; break;
+        case "Baby Blue": return "rgba(59,97,191,0.5)"; break;
         case "Green": return "rgba(45,181,45,0.5)"; break;
-        case "Orange": return "rgba(143,73,3,0.9)"; break;
         case "Red": return "rgba(224,38,38,0.8)"; break;
         case "Yellow": return "rgba(227,201,57,0.8)"; break;
         default: return "white"; break;

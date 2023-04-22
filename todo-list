@@ -2,18 +2,10 @@ To-Do List
 
 
 
-Currently
-- Level 10: Card Curse (Every 5 turns or so, a card is modified to be worse.)
-- Write dialogue for campaign
+Additions
+- Level 10: Add a death timer. (Configurable seconds)
+- Finish Bleed chaining puzzle
+- Omen icon
 
-
-Animations to improve:
-- Fix card animations when the round first starts
-- Losing animation
-- Curse animation
-
-
-Future Projects:
-- Puzzle campaign
-- Sound Effects
-- More statistics
+Finally
+- Play test for difficulty curve and dialogue

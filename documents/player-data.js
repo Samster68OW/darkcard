@@ -3,27 +3,40 @@
 
 
 // User Data
-var username = 'Player';
-var farthestLevel = [];
+let farthestLevel = [];
+let cardsPlayed = 0;
 
 
 
-var loggedIn = false;
+// Load Data
 function loadData() {
-    GJAPI.UserFetchCurrent(function(pResponse) {
-        if (!pResponse.users) {return;}
-        username = pResponse.users[0].username;
-        loggedIn = true;
-        // TODO: CHANGE FARTHEST LEVEL TO STRING?
-    });
+    if (localStorage.getItem('farthestLevel') !== null) {
+        farthestLevel = JSON.parse(localStorage.getItem('farthestLevel'));
+    }
+    if (localStorage.getItem('cardsPlayed') !== null) {
+        cardsPlayed = Number(localStorage.getItem('cardsPlayed'));
+    }
 };
 
 
 
 // Save Data
 function saveData() {
-    if (loggedIn === false) {return;}
-    // Save farthestLevel
-        // TODO STRINGIFY FARTHEST LEVEL
-        //GJAPI.DataStoreSet(GJAPI.DATA_STORE_USER, `farthestLevel`, username);
+    localStorage.setItem('farthestLevel', JSON.stringify(farthestLevel));
+    localStorage.setItem('cardsPlayed', cardsPlayed);
+};
+
+
+
+// Reset Data
+function resetData() {
+    if (confirm("Are you sure you want to reset all of your save data?") === true) {
+        farthestLevel = [];
+        for (var i=0; i<playlist.length; i++) {
+            farthestLevel.push(1);
+        }
+        cardsPlayed = 0;
+        saveData();
+        location.reload();
+    }
 };

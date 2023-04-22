@@ -3,17 +3,17 @@
 
 
 // Big Variables
-var currentPlaylist;
-var currentLevel;
-var level;
+let currentPlaylist;
+let currentLevel;
+let level;
 
 // Round Variables
-var currentDeck;
-var playerHand;
-var playerstat;
-var dialogueArea = false;
-var currentMode;
-var canPlayCard;
+let currentDeck;
+let playerHand;
+let playerstat;
+let dialogueArea = false;
+let currentMode;
+let canPlayCard;
 
 
 
@@ -22,7 +22,6 @@ function playGame(selectedLevel) {
         canPlayCard = false;
         currentLevel = selectedLevel;
         level = playlist[currentPlaylist][currentLevel];
-        currentMode = playlist[currentPlaylist].gameMode;
         playerStat = {
             bleeding:0,
             feature:level.feature,
@@ -103,6 +102,7 @@ function setupFeatures() {
 
 
 function dealCards() {
+        canPlayCard = true;
     // Lower locks
         for (var d=0; d<playerHand.length; d++) {
             if (playerStat.lock[d] > 0) {
@@ -111,6 +111,12 @@ function dealCards() {
         }
         if (currentDeck.length === 0) {
             playerStat.lock = [0, 0, 0];
+        }
+    // Alter omens
+        for (var d=0; d<playerHand.length; d++) {
+            if (playerHand[d] === 'Omen') {
+                playerHand[d] = 'Knife';
+            }
         }
     // Build
         var slideIn = [false, false, false];
@@ -151,12 +157,11 @@ function dealCards() {
                 $(`#card${c}`).addClass('slideCardDownClass');
             }
         }
-        setTimeout(function(){updateCardsLeft();},100)
+        setTimeout(function(){ updateCardsLeft();},100);
         setTimeout(function(){
             for (var c=0; c<slideIn.length; c++) {
                 $(`#card${c}`).removeClass('slideCardDownClass');
             }
-            canPlayCard = true;
         },300);
 };
 function updateCardsLeft() {
@@ -188,6 +193,7 @@ function playCard(slot) {
             return;
         }
     canPlayCard = false;
+    cardsPlayed++;
     cardAction(slot, playerHand[slot]);
     playerHand[slot] = false;
     $(`#card${slot}`).addClass('slideCardUpClass');
@@ -229,9 +235,7 @@ function checkEndConditions() {
         if (playerStat.hearts <= 0) {gameOver = true;}
         if (gameOver === true) {
             $('#cardTableSpot').html('');
-            setTimeout(function(){
-                backToMenu('lose');
-            },2000);
+            backToMenu('lose');
             return;
         }
     // Neutral conditions
@@ -252,7 +256,6 @@ function checkEndConditions() {
 
 
 function doneWithDialogue() {
-    dialogueArea = false;
     if (dialogueType === 'start') {dealCards();}
     else if (dialogueType === 'end') {
         if (farthestLevel[currentPlaylist] === currentLevel) {
@@ -273,15 +276,13 @@ function backToMenu(state) {
         },3000);
     }
     else if (state === 'lose') {
+        $('#area2').fadeOut(0);
+        $('#area3').fadeIn(0);
         setTimeout(function(){
-            $('#area2').fadeOut(0);
-            $('#area3').fadeIn(0);
-            setTimeout(function(){
-                $('#area3').fadeOut(2000);
-                setTimeout(function() {
-                    loadSpace(4);
-                },3000);
-            },2000);
-        },1000);
+            $('#area3').fadeOut(2000);
+            setTimeout(function() {
+                loadSpace(4);
+            },3000);
+        },2000);
     }
 };

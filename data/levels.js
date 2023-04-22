@@ -2,23 +2,10 @@
 
 
 
-var playlist = [];
-function buildPlaylists() {
-    playlist = [
-
-        baseCampaign,
-        basePuzzles
-        
-    ];
-}
-
-
-
 const baseCampaign = [
     {
         name:"Campaign",
-        author:"Half a Man Games",
-        gameMode:"campaign"
+        author:"Half a Man Games"
     },
     {
         name:"Cards",
@@ -34,7 +21,7 @@ const baseCampaign = [
             ],
             end:[
                 "Well done.",
-                "However, this is only the beginning."
+                "See you next time."
             ]
         },
         deck:[
@@ -71,14 +58,8 @@ const baseCampaign = [
     {
         name:"Burn",
         dialogue:{
-            start:[
-                "Now I'm giving you a little more firepower.",
-                "But the cards will be much more dangerous.",
-                "I'm sure you'll figure it out."
-            ],
-            end:[
-                "Wow, it's getting hot in here!"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 4],
@@ -94,17 +75,8 @@ const baseCampaign = [
     {
         name:"Lock",
         dialogue:{
-            start:[
-                "I was reading an interesting story the other day.",
-                "It was a story about two people.",
-                "One man left home and fed pigs...",
-                "And the other complained that people were happy.",
-                "Which character do you relate to?"
-            ],
-            end:[
-                "Personally, I relate more to the father in the story.",
-                "Except I'm not so welcoming to those that have wronged me."
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 5],
@@ -121,12 +93,8 @@ const baseCampaign = [
     {
         name:"Key",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 4],
@@ -144,12 +112,8 @@ const baseCampaign = [
     {
         name:"Bleed",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 4],
@@ -168,12 +132,8 @@ const baseCampaign = [
     {
         name:"Bandage",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 4],
@@ -192,12 +152,8 @@ const baseCampaign = [
     {
         name:"Art",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Art", 5],
@@ -216,12 +172,8 @@ const baseCampaign = [
     {
         name:"Thumbs Up",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Bandage", 6],
@@ -240,12 +192,8 @@ const baseCampaign = [
     {
         name:"Stress",
         dialogue:{
-            start:[
-                "Beans"
-            ],
-            end:[
-                "Beans"
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Bandage", 7],
@@ -260,7 +208,7 @@ const baseCampaign = [
             ["ThumbsUp", 8]
         ],
         shuffle:true,
-        feature:{health:true, sanity:true, curses:true}
+        feature:{health:true, sanity:true}
     }
 ];
 
@@ -269,18 +217,13 @@ const baseCampaign = [
 const basePuzzles = [
     {
         name:"Puzzles",
-        author:"Half a Man Games",
-        gameMode:"puzzle"
+        author:"Half a Man Games"
     },
     {
         name:"Bleed Chaining", // TODO
         dialogue:{
-            start:[
-                "(Click to begin.)"
-            ],
-            end:[
-                "Well done."
-            ]
+            start:[],
+            end:[]
         },
         deck:[
             ["Bleed", 3],
@@ -290,26 +233,6 @@ const basePuzzles = [
             ["Flower", 3]
         ],
         shuffle:false,
-        feature:{health:true, sanity:false}
-    },
-    {
-        name:"Testing", // TODO
-        dialogue:{
-            start:[
-                "(Click to begin.)"
-            ],
-            end:[
-                "Well done."
-            ]
-        },
-        deck:[
-            ["Bleed", 3],
-            ["Bandage", 1],
-            ["Bleed", 2],
-            ["Bandage", 1],
-            ["Flower", 5]
-        ],
-        shuffle:true,
         feature:{health:true, sanity:false}
     }
 ];

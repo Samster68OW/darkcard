@@ -15,9 +15,9 @@
             <!--data-->
                 <script src='data/cards.js' type='text/javascript'></script>
                 <script src='data/levels.js' type='text/javascript'></script>
+                <script src='data/playlists.js' type='text/javascript'></script>
             <!--documents-->
                 <script src='documents/dialogue.js' type='text/javascript'></script>
-                <script src='documents/gj-js-api.js' type='text/javascript'></script>
                 <script src='documents/gameplay.js' type='text/javascript'></script>
                 <script src='documents/player-data.js' type='text/javascript'></script>
             <link href='animations.css' rel='stylesheet'>
@@ -78,7 +78,6 @@
         </div>
         <div id='area7' class='mainArea' hidden><br> <!--Statistics-->
             <div id="mainTitle">Statistics</div>
-            <div id="usernameSpot"></div>
             <div id="informationSpot"></div>
             <div class="mainMenuList">
                 <div onclick="loadSpace(1);">Back</div>
@@ -101,7 +100,6 @@ $(document).ready(function(){
     for (var i=0; i<playlist.length; i++) {
         farthestLevel.push(1);
     }
-    farthestLevel = [10, 1]; // TODO
     loadData();
     setTimeout(function(){
         $('#fontLoader').fadeOut(0);
@@ -118,24 +116,7 @@ function loadSpace(num) {
             case 4: generateLevelSelectScreen(); break;
             case 5: generateCardGalleryScreen(); break;
             case 6: generatePlaylistScreen(); break;
-            case 7:
-                // Calculate Total Levels
-                    var levelsTotal = 0;
-                    for (var a=0; a<playlist.length; a++) {
-                        for (var b=0; b<playlist[a].length; b++) {
-                            levelsTotal++;
-                        }
-                        levelsTotal--;
-                    }
-                // Calculate Levels Beaten
-                    var levelsBeaten = 0;
-                    for (var a=0; a<farthestLevel.length; a++) {
-                        levelsBeaten += farthestLevel[a];
-                        levelsBeaten--;
-                    }
-                $('#informationSpot').html(`Levels Beaten: <span style='color:yellow'>${levelsBeaten} / ${levelsTotal}</span>`);
-                $('#usernameSpot').html(username);
-                break;
+            case 7: generateStatsScreen(); break;
         }
     // General
         $('.mainArea').fadeOut(0);
@@ -163,7 +144,8 @@ function generateLevelSelectScreen() {
 function generateCardGalleryScreen() {
     var display = `<table id='cardGalleryTable'>`;
     for (var a=0; a<card.length; a++) {
-        display += `<tr><td><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
+        var currentColor = setCardColor(card[a].color);
+        display += `<tr><td style='background-color:${currentColor}' class='cardbgTint'><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
     }
     display += `</table>`;
     $('#cardGallerySpot').html(display);
@@ -180,6 +162,33 @@ function generatePlaylistScreen() {
     display += `</table>`;
     $('#playlistSelectSpot').html(display);
 };
+
+
+function generateStatsScreen() {
+    var display = '';
+    // Calculate Total Levels
+        var levelsTotal = 0;
+        for (var a=0; a<playlist.length; a++) {
+            for (var b=0; b<playlist[a].length; b++) {
+                levelsTotal++;
+            }
+            levelsTotal--;
+        }
+    // Calculate Levels Beaten
+        var levelsBeaten = 0;
+        for (var a=0; a<farthestLevel.length; a++) {
+            levelsBeaten += farthestLevel[a];
+            levelsBeaten--;
+        }
+    // Level Progress
+        display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten} / ${levelsTotal}</span><br>`;
+    // Cards Played
+        display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
+    // Display
+        display += `<br><span id='resetButton' onclick='resetData();'>[Reset all data.]</span>`;
+        $('#informationSpot').html(display)
+};
+
 
 
         </script>

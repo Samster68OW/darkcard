@@ -111,10 +111,12 @@ center {
     width:630px;
 }
 #cardGalleryTable td {
-    background-color:#292929;
+    background-image:url("images/carddetails/cardbanner.png");
+    background-size:100% 100%;
     padding-bottom:10px;
     padding-left:12px;
     padding-top:10px;
+    text-shadow:0 0 6px black;
 }
 #cardGalleryTable img {
     height:30px;
@@ -279,10 +281,7 @@ center {
     text-align:left;
     width:650px;
 }
-#usernameSpot {
-    left:200px;
-    position:absolute;
-    text-align:left;
-    top:170px;
-    width:600px;
+#resetButton:hover {
+    cursor:pointer;
+    color:yellow;
 }
