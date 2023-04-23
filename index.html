@@ -81,6 +81,7 @@
             <div id="mainTitle">Statistics</div>
             <div id="informationSpot"></div>
             <div class="mainMenuList">
+                <div onclick='resetData();'>Reset Data</div><br>
                 <div onclick="loadSpace(1);">Back</div>
             </div>
         </div>
@@ -186,7 +187,6 @@ function generateStatsScreen() {
     // Cards Played
         display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
     // Display
-        display += `<br><span id='resetButton' onclick='resetData();'>[Reset all data]</span>`;
         $('#informationSpot').html(display)
 };
 

@@ -305,7 +305,3 @@ center {
     text-align:left;
     width:650px;
 }
-#resetButton:hover {
-    cursor:pointer;
-    color:yellow;
-}
