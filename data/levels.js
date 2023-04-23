@@ -11,8 +11,8 @@ const baseCampaign = [
         name:"Cards",
         dialogue:{
             start:[
-                "Welcome.",
-                "The rules of the game are simple...",
+                "Welcome. (Click to advance.)",
+                "The rules of the game are simple.",
                 "Survive the cards.",
                 "I will deal you three cards at a time.",
                 "Click on a card to play it.",
@@ -31,18 +31,17 @@ const baseCampaign = [
             ["ThumbsUp", 2]
         ],
         shuffle:true,
-        feature:{health:false, sanity:false}
+        feature:{health:false, sanity:false, timer:-1}
     },
     {
-        name:"Knife",
+        name:"Dangerous",
         dialogue:{
             start:[
                 "This time, the cards are a bit more dangerous.",
                 "I'd be careful."
             ],
             end:[
-                "Well done.",
-                "Don't worry, I'll restore your health between rounds."
+                "That wasn't too bad, was it?"
             ]
         },
         deck:[
@@ -53,7 +52,7 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
         name:"Burn",
@@ -70,7 +69,7 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
         name:"Lock",
@@ -88,7 +87,7 @@ const baseCampaign = [
             ["ThumbsUp", 4]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
         name:"Key",
@@ -107,10 +106,10 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
-        name:"Bleed",
+        name:"Bleeding",
         dialogue:{
             start:[],
             end:[]
@@ -127,7 +126,7 @@ const baseCampaign = [
             ["ThumbsUp", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
         name:"Bandage",
@@ -147,12 +146,15 @@ const baseCampaign = [
             ["Lock", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     },
     {
         name:"Art",
         dialogue:{
-            start:[],
+            start:[
+                "You've been doing pretty well.",
+                "But how long can you keep your wits about you?"
+            ],
             end:[]
         },
         deck:[
@@ -167,10 +169,10 @@ const baseCampaign = [
             ["Lock", 3]
         ],
         shuffle:true,
-        feature:{health:true, sanity:true}
+        feature:{health:true, sanity:true, timer:-1}
     },
     {
-        name:"Thumbs Up",
+        name:"Appreciation",
         dialogue:{
             start:[],
             end:[]
@@ -187,13 +189,21 @@ const baseCampaign = [
             ["ThumbsUp", 8]
         ],
         shuffle:true,
-        feature:{health:true, sanity:true}
+        feature:{health:true, sanity:true, timer:-1}
     },
     {
-        name:"Stress",
+        name:"Countdown",
         dialogue:{
-            start:[],
-            end:[]
+            start:[
+                "You know, I really have enjoyed our time together.",
+                "But unfortunately, your time is up.",
+                "I'm not letting you get any farther.",
+                "I've got a promise to keep."
+            ],
+            end:[
+                "Incredible.",
+                "Simply incredible."
+            ]
         },
         deck:[
             ["Bandage", 7],
@@ -208,7 +218,7 @@ const baseCampaign = [
             ["ThumbsUp", 8]
         ],
         shuffle:true,
-        feature:{health:true, sanity:true}
+        feature:{health:true, sanity:true, timer:90}
     }
 ];
 
@@ -220,19 +230,25 @@ const basePuzzles = [
         author:"Half a Man Games"
     },
     {
-        name:"Bleed Chaining", // TODO
+        name:"Bleed Chaining",
         dialogue:{
-            start:[],
+            start:[
+                "The Bleed card takes a few turns to fully activate.",
+                "Playing another Bleed resets the counter.",
+                "Use this trick to complete the puzzle."
+            ],
             end:[]
         },
         deck:[
+            ["Knife", 3],
+            ["Bleed", 3],
+            ["Knife", 1],
+            ["Flower", 1],
             ["Bleed", 3],
             ["Bandage", 1],
-            ["Bleed", 2],
-            ["Bandage", 1],
-            ["Flower", 3]
+            ["Heal", 2]
         ],
         shuffle:false,
-        feature:{health:true, sanity:false}
+        feature:{health:true, sanity:false, timer:-1}
     }
 ];

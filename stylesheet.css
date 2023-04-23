@@ -47,6 +47,19 @@ center {
     opacity:1.0;
     text-decoration:underline;
 }
+/* Scroll bar */
+::-webkit-scrollbar {
+    width:15px;
+}
+::-webkit-scrollbar-track {
+    background:#1c1c1c; 
+}
+::-webkit-scrollbar-thumb {
+    background:#888; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background:#555; 
+}
 
 
 
@@ -239,6 +252,7 @@ center {
     right:10px;
 }
 #sanityTable td {
+    background-color:green;
     height:15px;
     width:30px;
 }
@@ -247,6 +261,16 @@ center {
     position:absolute;
     right:45px;
     transform:rotate(-90deg);
+}
+#timerSpot {
+    border:5px solid #8c0b0b;
+    border-radius:10px;
+    padding:8px;
+    position:absolute;
+    right:20px;
+    text-align:right;
+    top:20px;
+    width:70px;
 }
 
 

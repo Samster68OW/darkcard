@@ -46,6 +46,7 @@
                 </tr></table>
                 <table id="sanityTable"></table>
                 <div id="sanityWord">Sanity</div>
+                <div id="timerSpot"></div>
             <!--Features Animations-->
                 <div id="enemyKnife"></div>
                 <div id="leftEye"></div>
@@ -185,7 +186,7 @@ function generateStatsScreen() {
     // Cards Played
         display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
     // Display
-        display += `<br><span id='resetButton' onclick='resetData();'>[Reset all data.]</span>`;
+        display += `<br><span id='resetButton' onclick='resetData();'>[Reset all data]</span>`;
         $('#informationSpot').html(display)
 };
 

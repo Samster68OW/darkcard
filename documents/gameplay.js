@@ -15,6 +15,9 @@ let dialogueArea = false;
 let currentMode;
 let canPlayCard;
 
+// Timer
+let timeInterval;
+
 
 
 function playGame(selectedLevel) {
@@ -24,7 +27,7 @@ function playGame(selectedLevel) {
         level = playlist[currentPlaylist][currentLevel];
         playerStat = {
             bleeding:0,
-            feature:level.feature,
+            feature:JSON.parse(JSON.stringify(level.feature)),
             hearts:3,
             lock:[],
             sanity:maxSanity,
@@ -97,6 +100,12 @@ function setupFeatures() {
             display += `<tr><td id='sanityCell${a}'></td></tr>`;
         }
         $('#sanityTable').html(display);
+    // Timer
+        $('#timerSpot').fadeOut(0);
+        if (playerStat.feature.timer > 0) {
+            $('#timerSpot').fadeIn(0);
+            updateTimer();
+        }
 };
 
 
@@ -218,8 +227,8 @@ function updateFeatures() {
         }
     // Sanity
         for (var a=maxSanity; a>0; a--) {
-            if (a <= playerStat.sanity) {$(`#sanityCell${a}`).css('background-color','green');}
-            else if (a > playerStat.sanity) {$(`#sanityCell${a}`).css('background-color','red');}
+            if (a <= playerStat.sanity) {$(`#sanityCell${a}`).css('opacity','1.0');}
+            else if (a > playerStat.sanity) {$(`#sanityCell${a}`).css('opacity','0.0');}
         }
 };
 function checkEndConditions() {
@@ -234,6 +243,7 @@ function checkEndConditions() {
     // Loss conditions
         if (playerStat.hearts <= 0) {gameOver = true;}
         if (gameOver === true) {
+            clearInterval(timeInterval);
             $('#cardTableSpot').html('');
             backToMenu('lose');
             return;
@@ -246,6 +256,7 @@ function checkEndConditions() {
     // Win conditions
         if (gameOver === false && currentDeck.length === 0 && cardsCleared === true) {
             gameOver = true;
+            clearInterval(timeInterval);
             setTimeout(function(){
                 playDialogue('end');
             },500);
@@ -255,8 +266,45 @@ function checkEndConditions() {
 
 
 
+// Timer Functions
+function updateTimer() {
+    var displayTime = playerStat.feature.timer.toString();
+    if (playerStat.feature.timer > 60) {
+        var minutes = Math.floor(playerStat.feature.timer / 60);
+        var seconds = playerStat.feature.timer - (minutes * 60);
+        if (seconds.toString().length === 1) {seconds = `0${seconds}`;}
+        displayTime = `${minutes}:${seconds}`;
+    }
+    $('#timerSpot').html(displayTime);
+    if (displayTime <= 30) {$('#timerSpot').css('color','yellow');}
+    else {$('#timerSpot').css('color','white');}
+};
+function timerLoop() {
+    timeInterval = setInterval(function(){
+        playerStat.feature.timer--;
+        if (playerStat.feature.timer <= -1) {
+            clearInterval(timeInterval);
+            $('#cardTableSpot').html('');
+            backToMenu('lose');
+        }
+        else {updateTimer();}
+    },1000);
+};
+
+
+
+
 function doneWithDialogue() {
-    if (dialogueType === 'start') {dealCards();}
+    if (dialogueType === 'start') {
+        dealCards();
+        if (playerStat.feature.timer > 0) {
+            playerStat.feature.timer--;
+            updateTimer();
+            setTimeout(function(){
+                timerLoop();
+            },300);
+        }
+    }
     else if (dialogueType === 'end') {
         if (farthestLevel[currentPlaylist] === currentLevel) {
             farthestLevel[currentPlaylist]++;

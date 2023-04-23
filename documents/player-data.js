@@ -31,11 +31,7 @@ function saveData() {
 // Reset Data
 function resetData() {
     if (confirm("Are you sure you want to reset all of your save data?") === true) {
-        farthestLevel = [];
-        for (var i=0; i<playlist.length; i++) {
-            farthestLevel.push(1);
-        }
-        cardsPlayed = 0;
+        localStorage.clear();
         saveData();
         location.reload();
     }
