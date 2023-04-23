@@ -5,7 +5,7 @@ This file briefly covers the other files within the 'data' folder, as well as ho
 This file is split into three sections:
 - const card: An array with the list of cards in the game. They do not have to be in alphabetical order. Each index is an object that contains each card's name, description, and background color.
 - function cardAction: This function is called when a card is successfully played. It contains a switch statement that performs the card's specific action. Many of these will check or alter a feature (see below).
-- function setCardColor: This function will set the specific rgba background color for each card with the cooresponding color. Most are transparent so that the card backgrounds are visible through the color.
+- function setCardColor: This function will set the specific rgba background color for each card with the corresponding color. Most are transparent so that the card backgrounds are visible through the color.
 
 ## levels.js
 This file contains arrays, each of which constitutes a playlist. The first item in each array is the playlist info. Every subsequent item is a level within the playlist. Below is a list of elements within each level:
