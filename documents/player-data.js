@@ -32,7 +32,6 @@ function saveData() {
 function resetData() {
     if (confirm("Are you sure you want to reset all of your save data?") === true) {
         localStorage.clear();
-        saveData();
         location.reload();
     }
 };

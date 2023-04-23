@@ -3,8 +3,6 @@
         <title>DARK CARD</title>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <!--Icons-->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <!--External-->
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +18,10 @@
                 <script src='documents/dialogue.js' type='text/javascript'></script>
                 <script src='documents/gameplay.js' type='text/javascript'></script>
                 <script src='documents/player-data.js' type='text/javascript'></script>
-            <link href='animations.css' rel='stylesheet'>
-            <script src='dev-log.js' type='text/javascript'></script>
-            <link href='stylesheet.css' rel='stylesheet'>
+                <script src='documents/start-round.js' type='text/javascript'></script>
+            <!--stylesheets-->
+                <link href='stylesheets/animations.css' rel='stylesheet'>
+                <link href='stylesheets/master-stylesheet.css' rel='stylesheet'>
     </head>
     <body>
     <center>
@@ -53,7 +52,8 @@
                 <div id="rightEye"></div>
         </div>
         <div id='area3' class='mainArea' hidden><br> <!--Game Over-->
-            <div id="gameoverTitle">Game Over!</div>
+            <div id="gameoverTitle">Game Over!</div><br>
+            <div id="deathReason"></div>
         </div>
         <div id='area4' class='mainArea' hidden><br> <!--Level Select-->
             <div id="mainTitle">Select Level</div>
@@ -115,79 +115,74 @@ function loadSpace(num) {
         }
     // Specifics
         switch (num) {
-            case 4: generateLevelSelectScreen(); break;
-            case 5: generateCardGalleryScreen(); break;
-            case 6: generatePlaylistScreen(); break;
-            case 7: generateStatsScreen(); break;
+            case 4: // Level Select
+                var display = `<table id='levelSelectTable'>`;
+                for (var a=1; a<farthestLevel[currentPlaylist]+1; a++) {
+                    if (a >= playlist[currentPlaylist].length) {break;}
+                    var coloring = '';
+                    if (a < farthestLevel[currentPlaylist]) {
+                        coloring = 'style="color:yellow;"';
+                    }
+                    display += `<tr><td onclick='playGame(${a});' ${coloring}>${a} - ${playlist[currentPlaylist][a].name}</td></tr>`;
+                }
+                display += `</table>`;
+                $('#levelSelectSpot').html(display);
+                $('#playlistNameSpot').html(`"${playlist[currentPlaylist][0].name}" by ${playlist[currentPlaylist][0].author}`);
+                if (farthestLevel[currentPlaylist] === playlist[currentPlaylist].length) {
+                    $('#playlistNameSpot').css('color','yellow');
+                }
+                else {
+                    $('#playlistNameSpot').css('color','white');
+                }
+                break;
+            case 5: // Card Gallery
+                var display = `<table id='cardGalleryTable'>`;
+                for (var a=0; a<card.length; a++) {
+                    var currentColor = setCardColor(card[a].color);
+                    display += `<tr><td style='background-color:${currentColor}' class='cardbgTint'><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
+                }
+                display += `</table>`;
+                $('#cardGallerySpot').html(display);
+                break;
+            case 6: // Playlist Select
+                var display = `<table id='levelSelectTable'>`;
+                for (var a=0; a<playlist.length; a++) {
+                    var coloring = '';
+                    if (farthestLevel[a] === playlist[a].length) {
+                        coloring = 'style="color:yellow;"';
+                    }
+                    display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4);'>"${playlist[a][0].name}" by ${playlist[a][0].author} (${playlist[a].length-1} Levels)</td></tr>`;
+                }
+                display += `</table>`;
+                $('#playlistSelectSpot').html(display);
+                break;
+            case 7: // Statistics
+                var display = '';
+                // Calculate Total Levels
+                    var levelsTotal = 0;
+                    for (var a=0; a<playlist.length; a++) {
+                        for (var b=0; b<playlist[a].length; b++) {
+                            levelsTotal++;
+                        }
+                        levelsTotal--;
+                    }
+                // Calculate Levels Beaten
+                    var levelsBeaten = 0;
+                    for (var a=0; a<farthestLevel.length; a++) {
+                        levelsBeaten += farthestLevel[a];
+                        levelsBeaten--;
+                    }
+                // Level Progress
+                    display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten} / ${levelsTotal}</span><br>`;
+                // Cards Played
+                    display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
+                // Display
+                    $('#informationSpot').html(display)
+                break;
         }
     // General
         $('.mainArea').fadeOut(0);
         $('#area' + num).fadeIn(0);
-};
-
-
-
-function generateLevelSelectScreen() {
-    var display = `<table id='levelSelectTable'>`;
-    for (var a=1; a<farthestLevel[currentPlaylist]+1; a++) {
-        if (a >= playlist[currentPlaylist].length) {break;}
-        display += `<tr><td onclick='playGame(${a});'>${a} - ${playlist[currentPlaylist][a].name}</td></tr>`;
-    }
-    display += `</table>`;
-    $('#levelSelectSpot').html(display);
-    $('#playlistNameSpot').html(`"${playlist[currentPlaylist][0].name}" by ${playlist[currentPlaylist][0].author}`);
-    if (farthestLevel[currentPlaylist] === playlist[currentPlaylist].length) {
-        $('#playlistNameSpot').css('color','yellow');
-    }
-    else {
-        $('#playlistNameSpot').css('color','white');
-    }
-};
-function generateCardGalleryScreen() {
-    var display = `<table id='cardGalleryTable'>`;
-    for (var a=0; a<card.length; a++) {
-        var currentColor = setCardColor(card[a].color);
-        display += `<tr><td style='background-color:${currentColor}' class='cardbgTint'><img src='images/card/${card[a].name.toLowerCase()}.png' alt='${card[a].name}'> ${card[a].name}: ${card[a].desc}</td></tr>`;
-    }
-    display += `</table>`;
-    $('#cardGallerySpot').html(display);
-};
-function generatePlaylistScreen() {
-    var display = `<table id='levelSelectTable'>`;
-    for (var a=0; a<playlist.length; a++) {
-        var coloring = '';
-        if (farthestLevel[a] === playlist[a].length) {
-            coloring = 'style="color:yellow;"';
-        }
-        display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4);'>"${playlist[a][0].name}" by ${playlist[a][0].author} (${playlist[a].length-1} Levels)</td></tr>`;
-    }
-    display += `</table>`;
-    $('#playlistSelectSpot').html(display);
-};
-
-
-function generateStatsScreen() {
-    var display = '';
-    // Calculate Total Levels
-        var levelsTotal = 0;
-        for (var a=0; a<playlist.length; a++) {
-            for (var b=0; b<playlist[a].length; b++) {
-                levelsTotal++;
-            }
-            levelsTotal--;
-        }
-    // Calculate Levels Beaten
-        var levelsBeaten = 0;
-        for (var a=0; a<farthestLevel.length; a++) {
-            levelsBeaten += farthestLevel[a];
-            levelsBeaten--;
-        }
-    // Level Progress
-        display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten} / ${levelsTotal}</span><br>`;
-    // Cards Played
-        display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
-    // Display
-        $('#informationSpot').html(display)
 };
 
 
