@@ -91,7 +91,7 @@
             <span style="font-family: 'Righteous', cursive;">2</span>
         </span>
     </div>
-    <div id="bottomInfo">Created by Half a Man Games on <a href="https://github.com/Samster68OW/darkcard">Github</a>.</div>
+    <div id="bottomInfo">Created by Half a Man Games on <a href="https://github.com/Samster68OW/darkcard" target="_blank">Github</a>.</div>
         <script type='text/javascript'>
 
 
@@ -127,13 +127,7 @@ function loadSpace(num) {
                 }
                 display += `</table>`;
                 $('#levelSelectSpot').html(display);
-                $('#playlistNameSpot').html(`"${playlist[currentPlaylist][0].name}" by ${playlist[currentPlaylist][0].author}`);
-                if (farthestLevel[currentPlaylist] === playlist[currentPlaylist].length) {
-                    $('#playlistNameSpot').css('color','yellow');
-                }
-                else {
-                    $('#playlistNameSpot').css('color','white');
-                }
+                $('#playlistNameSpot').html(`${playlist[currentPlaylist][0].name}`);
                 break;
             case 5: // Card Gallery
                 var display = `<table id='cardGalleryTable'>`;
@@ -151,7 +145,7 @@ function loadSpace(num) {
                     if (farthestLevel[a] === playlist[a].length) {
                         coloring = 'style="color:yellow;"';
                     }
-                    display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4);'>"${playlist[a][0].name}" by ${playlist[a][0].author} (${playlist[a].length-1} Levels)</td></tr>`;
+                    display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4);'>${playlist[a][0].name} <span class='small'>(by ${playlist[a][0].author})</span></td></tr>`;
                 }
                 display += `</table>`;
                 $('#playlistSelectSpot').html(display);
@@ -173,7 +167,9 @@ function loadSpace(num) {
                         levelsBeaten--;
                     }
                 // Level Progress
-                    display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten} / ${levelsTotal}</span><br>`;
+                    display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten}</span>`
+                    display += ` of `;
+                    display += `<span style='color:yellow'>${levelsTotal}</span><br>`;
                 // Cards Played
                     display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
                 // Display

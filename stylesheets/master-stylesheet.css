@@ -63,20 +63,19 @@ a {
     width:15px;
 }
 ::-webkit-scrollbar-track {
-    background:#1c1c1c; 
+    background:black;
 }
 ::-webkit-scrollbar-thumb {
-    background:#888; 
+    background:#888;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background:#555; 
+    background:#555;
 }
 
 
 
 /* Level Select Screen */
 #playlistSelectSpot {
-    border:2px solid grey;
     bottom:30px;
     height:350px;
     left:200px;
@@ -85,7 +84,6 @@ a {
     width:650px;
 }
 #levelSelectSpot {
-    border:2px solid grey;
     bottom:30px;
     height:350px;
     left:200px;
@@ -116,12 +114,14 @@ a {
     top:170px;
     width:600px;
 }
+.small {
+    font-size:20px;
+}
 
 
 
 /* Card Gallery */
 #cardGallerySpot {
-    border:2px solid grey;
     bottom:30px;
     height:350px;
     left:200px;
@@ -143,6 +143,8 @@ a {
     text-shadow:0 0 6px black;
 }
 #cardGalleryTable img {
+    -webkit-filter: drop-shadow(5px 5px 5px black);
+    filter: drop-shadow(5px 5px 5px black);
     height:30px;
     width:30px;
 }
@@ -198,6 +200,8 @@ a {
 }
 #cardTable td img {
     bottom:60px;
+    -webkit-filter: drop-shadow(5px 5px 5px black);
+    filter: drop-shadow(5px 5px 5px black);
     height:80px;
     left:22px;
     position:absolute;
@@ -314,13 +318,12 @@ a {
 
 /* Information Screen */
 #informationSpot {
-    border:2px solid grey;
     bottom:30px;
     height:350px;
-    left:200px;
+    left:500px;
     line-height:1.5;
     padding-left:15px;
     position:absolute;
     text-align:left;
-    width:650px;
+    width:350px;
 }

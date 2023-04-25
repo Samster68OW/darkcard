@@ -4,7 +4,7 @@
 
 const baseCampaign = [
     {
-        name:"Campaign",
+        name:"DARK CARD Campaign",
         author:"Half a Man Games"
     },
     {
@@ -28,7 +28,7 @@ const baseCampaign = [
             ["Art", 2],
             ["Flower", 3],
             ["Heal", 3],
-            ["ThumbsUp", 2]
+            ["Thumb", 2]
         ],
         shuffle:true,
         feature:{health:false, sanity:false, timer:-1}
@@ -49,7 +49,7 @@ const baseCampaign = [
             ["Flower", 3],
             ["Heal", 6],
             ["Knife", 5],
-            ["ThumbsUp", 3]
+            ["Thumb", 3]
         ],
         shuffle:true,
         feature:{health:true, sanity:false, timer:-1}
@@ -66,7 +66,7 @@ const baseCampaign = [
             ["Flower", 3],
             ["Heal", 3],
             ["Knife", 8],
-            ["ThumbsUp", 3]
+            ["Thumb", 3]
         ],
         shuffle:true,
         feature:{health:true, sanity:false, timer:-1}
@@ -84,7 +84,7 @@ const baseCampaign = [
             ["Heal", 3],
             ["Knife", 6],
             ["Lock", 2],
-            ["ThumbsUp", 4]
+            ["Thumb", 4]
         ],
         shuffle:true,
         feature:{health:true, sanity:false, timer:-1}
@@ -103,7 +103,7 @@ const baseCampaign = [
             ["Key", 5],
             ["Knife", 6],
             ["Lock", 5],
-            ["ThumbsUp", 3]
+            ["Thumb", 3]
         ],
         shuffle:true,
         feature:{health:true, sanity:false, timer:-1}
@@ -123,7 +123,7 @@ const baseCampaign = [
             ["Key", 3],
             ["Knife", 3],
             ["Lock", 3],
-            ["ThumbsUp", 3]
+            ["Thumb", 3]
         ],
         shuffle:true,
         feature:{health:true, sanity:false, timer:-1}
@@ -186,7 +186,7 @@ const baseCampaign = [
             ["Key", 5],
             ["Knife", 3],
             ["Lock", 3],
-            ["ThumbsUp", 8]
+            ["Thumb", 8]
         ],
         shuffle:true,
         feature:{health:true, sanity:true, timer:-1}
@@ -215,7 +215,7 @@ const baseCampaign = [
             ["Knife", 3],
             ["Lock", 4],
             ["Stress", 3],
-            ["ThumbsUp", 8]
+            ["Thumb", 8]
         ],
         shuffle:true,
         feature:{health:true, sanity:true, timer:90}
@@ -226,7 +226,7 @@ const baseCampaign = [
 
 const basePuzzles = [
     {
-        name:"Puzzles",
+        name:"DARK CARD Puzzles",
         author:"Half a Man Games"
     },
     {
@@ -280,7 +280,7 @@ const commPuzzles = [
             ["Knife", 1],
             ["Omen", 3],
             ["Lock", 1],
-            ["ThumbsUp", 1],
+            ["Thumb", 1],
         ],
         shuffle:false,
         feature:{health:true, sanity:true, timer:-1}

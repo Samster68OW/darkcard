@@ -109,12 +109,12 @@
     @keyframes knifeAttack {
         from {
             bottom:40px;
-            left:15px;
+            left:10px;
             transform: rotate(-70deg);
         }
         to {
             bottom:40px;
-            left:165px;
+            left:160px;
             transform: rotate(-160deg);
         }
     }

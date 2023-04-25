@@ -14,7 +14,8 @@ const card = [
     {name:"Lock", color:"Red", desc:"Locks the current card slot for three turns."},
     {name:"Omen", color:"Red", desc:"If left unplayed, transforms into a Knife."},
     {name:"Stress", color:"Red", desc:"Decreases sanity by two points."},
-    {name:"ThumbsUp", color:"Baby Blue", desc:"Restores two sanity points."}
+    {name:"Super Heal", color:"Green", desc:"Restores two hearts."},
+    {name:"Thumb", color:"Baby Blue", desc:"Restores two sanity points."}
 ];
 
 
@@ -87,7 +88,11 @@ function cardAction(slot, cardName) {
                    $('#rightEye').addClass('rightEyeShakeClass');
                 },1000);
             break;
-        case "ThumbsUp":
+        case "Super Heal":
+            if (playerStat.feature.health === false) {return;}
+            playerStat.hearts += 2;
+            if (playerStat.hearts > 3) {playerStat.hearts = 3;}
+        case "Thumb":
             if (playerStat.feature.sanity === false) {return;}
             playerStat.sanity += 3;
             if (playerStat.sanity > maxSanity) {playerStat.sanity = maxSanity;}
@@ -99,10 +104,10 @@ function cardAction(slot, cardName) {
 
 function setCardColor(colorID) {
     switch (colorID) {
-        case "Brown": return "rgba(143,73,3,0.9)"; break;
-        case "Baby Blue": return "rgba(59,97,191,0.5)"; break;
-        case "Green": return "rgba(45,181,45,0.5)"; break;
-        case "Red": return "rgba(224,38,38,0.8)"; break;
+        case "Brown": return "rgba(143,73,3,0.8)"; break;
+        case "Baby Blue": return "rgba(59,97,191,0.8)"; break;
+        case "Green": return "rgba(45,181,45,0.8)"; break;
+        case "Red": return "rgba(225,0,0,0.8)"; break;
         case "Yellow": return "rgba(227,201,57,0.8)"; break;
         default: return "white"; break;
     }

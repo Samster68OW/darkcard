@@ -24,5 +24,10 @@ Features are listed within each level. If the features are disabled, the cards a
 - sanity [boolean]: The sanity meter starts at twenty, and drains one point each turn. Once it reaches zero, the player loses the level.
 - timer [integer]: Adds a timer on the screen. The player must finish the level before the timer reaches zero or the player loses. (Set the value to -1 to disable the feature.)
 
+## Image Sizes
+- Card Backgrounds: 125px 200px
+- Card Icons: 80px 80px
+- Card Gallery Banner: 620px 56px
+
 # Conclusion
 Hopefully this guide helped you interpret the crazy code I have constructed! Please reach out if you have any questions or run into any problems.
