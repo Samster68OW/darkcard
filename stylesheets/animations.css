@@ -79,7 +79,7 @@
     bottom:75px;
     height:100px;
     position:absolute;
-    right:250px;
+    left:80px;
     width:100px;
 }
 /* Hover */
@@ -109,12 +109,12 @@
     @keyframes knifeAttack {
         from {
             bottom:40px;
-            right:350px;
+            left:15px;
             transform: rotate(-70deg);
         }
         to {
             bottom:40px;
-            right:200px;
+            left:165px;
             transform: rotate(-160deg);
         }
     }

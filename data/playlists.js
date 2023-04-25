@@ -7,7 +7,8 @@ function buildPlaylists() {
     playlist = [
 
         baseCampaign,
-        basePuzzles
+        basePuzzles,
+        commPuzzles
         
     ];
 }

@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>DARK CARD</title>
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <!--External-->
@@ -24,7 +25,7 @@
                 <link href='stylesheets/master-stylesheet.css' rel='stylesheet'>
     </head>
     <body>
-    <center>
+    <div id="mainBox">
         <div id='area1' class='mainArea' hidden><br> <!--Main Menu-->
             <div id="mainTitle">DARK CARD</div>
             <div class="mainMenuList">
@@ -85,24 +86,23 @@
                 <div onclick="loadSpace(1);">Back</div>
             </div>
         </div>
-
-
-
         <span id="fontLoader" style="color:black;">
             <span style="font-family: 'Edu NSW ACT Foundation', cursive;">1</span>
             <span style="font-family: 'Righteous', cursive;">2</span>
         </span>
-    </center>
+    </div>
+    <div id="bottomInfo">Created by Half a Man Games on <a href="https://github.com/Samster68OW/darkcard">Github</a>.</div>
         <script type='text/javascript'>
 
 
 
 $(document).ready(function(){
     buildPlaylists();
-    for (var i=0; i<playlist.length; i++) {
+    farthestLevel = [];
+    loadData();
+    while (farthestLevel.length < playlist.length) {
         farthestLevel.push(1);
     }
-    loadData();
     setTimeout(function(){
         $('#fontLoader').fadeOut(0);
         loadSpace(1);

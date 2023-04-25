@@ -9,11 +9,22 @@ body {
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
 }
-center {
+#mainBox {
     border:1px solid grey;
     height:600px;
-    position:fixed;
+    margin:auto;
+    position:relative;
+    top:50px;
     width:900px;
+}
+#bottomInfo {
+    bottom:10px;
+    font-size:20px;
+    left:10px;
+    position:absolute;
+}
+a {
+    color:blue;
 }
 
 
@@ -158,13 +169,13 @@ center {
 /* Cards */
 #cardTableSpot {
     position:absolute;
-    top:400px;
+    top:365px;
     width:900px;
 }
 #cardTable {
     border-spacing:20px;
     position:absolute;
-    left:10px;
+    left:220px;
 }
 #cardTable td {
     background-image:url("../images/carddetails/cardbg.png");
@@ -172,12 +183,12 @@ center {
     border-radius:3px;
     cursor:pointer;
     font-size:25px;
-    height:160px;
+    height:200px;
     position:relative;
     text-align:center;
     text-shadow:0 0 6px black;
     vertical-align:bottom;
-    width:100px;
+    width:125px;
 }
 #cardTable td:hover {
     box-shadow:0px 0px 25px yellow;
@@ -186,19 +197,20 @@ center {
     background-blend-mode:multiply;
 }
 #cardTable td img {
-    bottom:45px;
-    height:70px;
-    left:15px;
+    bottom:60px;
+    height:80px;
+    left:22px;
     position:absolute;
-    width:70px;
+    width:80px;
 }
 #cardsLeftSpot {
     background-color:#292929;
-    bottom:20px;
+    bottom:15px;
     border-radius:3px;
     height:65px;
-    left:427px;
+    left:675px;
     position:absolute;
+    text-align:center;
     text-shadow:0 0 6px black;
     width:50px;
 }
@@ -213,7 +225,7 @@ center {
 #heartTable {
     border-spacing:10px;
     bottom:10px;
-    left:500px;
+    left:15px;
     position:absolute;
 }
 #heartTable td {

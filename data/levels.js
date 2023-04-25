@@ -250,5 +250,39 @@ const basePuzzles = [
         ],
         shuffle:false,
         feature:{health:true, sanity:false, timer:-1}
+    },
+];
+
+
+
+const commPuzzles = [
+    {
+        name:"Community Puzzles",
+        author:"Various Authors"
+    },
+    {
+        name:"Darksight by Texture_Turtle",
+        dialogue:{
+            start:[
+                "The Omen Card turns into a knife after a round.",
+                "Use this to your advantage.",
+                "Good luck.",
+            ],
+            end:[]
+        },
+        deck:[
+            ["Omen", 4],
+            ["Burn", 1],
+            ["Knife", 1],
+            ["Stress", 2],
+            ["Omen", 3],
+            ["Stress", 2],
+            ["Knife", 1],
+            ["Omen", 3],
+            ["Lock", 1],
+            ["ThumbsUp", 1],
+        ],
+        shuffle:false,
+        feature:{health:true, sanity:true, timer:-1}
     }
 ];
