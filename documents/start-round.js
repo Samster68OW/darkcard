@@ -131,6 +131,7 @@ function backToMenu(state, reason) {
             }
         $('#area2').fadeOut(0);
         $('#area3').fadeIn(0);
+        playSound('Game Over');
         setTimeout(function(){
             $('#area3').fadeOut(2000);
             setTimeout(function() {

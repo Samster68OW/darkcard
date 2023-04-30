@@ -13,8 +13,10 @@ const card = [
     {name:"Knife", color:"Red", desc:"Deals one heart of damage."},
     {name:"Lock", color:"Red", desc:"Locks the current card slot for three turns."},
     {name:"Omen", color:"Red", desc:"If left unplayed, transforms into a Knife."},
+    {name:"Rewind", color:"Green", desc:"Adds five seconds to the timer."},
     {name:"Stress", color:"Red", desc:"Decreases sanity by two points."},
     {name:"Super Heal", color:"Green", desc:"Restores two hearts."},
+    {name:"Super Rewind", color:"Green", desc:"Adds ten seconds to the timer."},
     {name:"Thumb", color:"Baby Blue", desc:"Restores two sanity points."}
 ];
 
@@ -33,16 +35,23 @@ function cardAction(slot, cardName) {
             break;
         case "Bleed":
             if (playerStat.feature.health === false) {return;}
+            if (playerStat.bleeding > 0) {bleedChains++;}
             playerStat.bleeding = 2; // Turns
             playerStat.bleeding++; // Counteract subtraction
             break;
         case "Burn":
+            var redCards = 0;
             for (var a=0; a<playerHand.length; a++) {
+                if (playerHand[a] !== false) {
+                    if (card[findCard(playerHand[a])].color === 'Red') {redCards++;}
+                }
                 playerHand[a] = false;
                 $(`#card${a}`).css('background-image', `url(images/carddetails/cardburn.png)`);
                 $(`#card${a}`).css('background-color', `transparent`);
                 $(`#card${a}`).html(``);
             }
+            if (redCards >= 2) {perfectBurns++;}
+            playSound('Burn');
             break;
         case "Heal":
             if (playerStat.feature.health === false) {return;}
@@ -72,6 +81,10 @@ function cardAction(slot, cardName) {
         case "Omen":
             // This card does nothing when it is played. It transforms into a Knife if left unattended.
             break;
+        case "Rewind":
+            playerStat.feature.timer += 5;
+            updateTimer();
+            break;
         case "Stress":
             if (playerStat.feature.sanity === false) {return;}
             playerStat.sanity -= 1;
@@ -92,6 +105,10 @@ function cardAction(slot, cardName) {
             if (playerStat.feature.health === false) {return;}
             playerStat.hearts += 2;
             if (playerStat.hearts > 3) {playerStat.hearts = 3;}
+        case "Super Rewind":
+            playerStat.feature.timer += 10;
+            updateTimer();
+            break;
         case "Thumb":
             if (playerStat.feature.sanity === false) {return;}
             playerStat.sanity += 3;

@@ -19,6 +19,7 @@
                 <script src='documents/dialogue.js' type='text/javascript'></script>
                 <script src='documents/gameplay.js' type='text/javascript'></script>
                 <script src='documents/player-data.js' type='text/javascript'></script>
+                <script src='documents/sound-engine.js' type='text/javascript'></script>
                 <script src='documents/start-round.js' type='text/javascript'></script>
             <!--stylesheets-->
                 <link href='stylesheets/animations.css' rel='stylesheet'>
@@ -29,10 +30,12 @@
         <div id='area1' class='mainArea' hidden><br> <!--Main Menu-->
             <div id="mainTitle">DARK CARD</div>
             <div class="mainMenuList">
-                <div onclick="loadSpace(6);">Play Game</div><br>
-                <div onclick="loadSpace(7);">Statistics</div><br>
-                <div onclick="loadSpace(5);">Card Gallery</div>
+                <div onclick="loadSpace(6); playSound('Select');">Play Game</div><br>
+                <div onclick="loadSpace(7); playSound('Select');">Statistics</div><br>
+                <div onclick="loadSpace(5); playSound('Select');">Card Gallery</div><br>
+                <div onclick="loadSpace(8); playSound('Select');">Options</div>
             </div>
+            <img src="images/star.png" id="menuStar" hidden>
         </div>
         <div id='area2' class='mainArea' onclick="skipDialogue();" hidden><br> <!--The Game-->
             <div id="dialogueLocation"></div>
@@ -61,31 +64,56 @@
             <div id="playlistNameSpot"></div>
             <div id="levelSelectSpot"></div>
             <div class="mainMenuList">
-                <div onclick="loadSpace(6);">Back</div>
+                <div onclick="loadSpace(6); playSound('Select');">Back</div>
             </div>
         </div>
         <div id='area5' class='mainArea' hidden><br> <!--Card Gallery-->
             <div id="mainTitle">Card Gallery</div>
             <div id="cardGallerySpot"></div>
             <div class="mainMenuList">
-                <div onclick="loadSpace(1);">Back</div>
+                <div onclick="loadSpace(1); playSound('Select');">Back</div>
             </div>
         </div>
         <div id='area6' class='mainArea' hidden><br> <!--Playlist Select-->
             <div id="mainTitle">Select Playlist</div>
             <div id="playlistSelectSpot"></div>
             <div class="mainMenuList">
-                <div onclick="loadSpace(1);">Back</div>
+                <div onclick="loadSpace(1); playSound('Select');">Back</div>
             </div>
         </div>
         <div id='area7' class='mainArea' hidden><br> <!--Statistics-->
             <div id="mainTitle">Statistics</div>
-            <div id="informationSpot"></div>
+            <div id="informationSpot">
+                Levels Beaten:
+                    <span id="stat-levelsBeaten" style='color:yellow'></span>
+                     of 
+                    <span id="stat-levelsTotal" style='color:yellow'></span>
+                <br>
+                Cards Played: <span id="stat-cardsPlayed" style='color:yellow'></span><br>
+                <span title='When playing a Burn card, burn two red cards.' style='cursor:help;'>
+                    Perfect Burns: <span id="stat-perfectBurns" style='color:yellow'></span>
+                </span><br>
+                <span title='Play a Bleed card during a bleed.' style='cursor:help;'>
+                    Bleed Chains: <span id="stat-bleedChains" style='color:yellow'></span>
+                </span><br>
+                <br>
+                <div class="small">Hover over a statistic to learn more about it.</div>
+            </div>
             <div class="mainMenuList">
                 <div onclick='resetData();'>Reset Data</div><br>
-                <div onclick="loadSpace(1);">Back</div>
+                <div onclick="loadSpace(1); playSound('Select');">Back</div>
             </div>
         </div>
+        <div id='area8' class='mainArea' hidden><br> <!--Options-->
+            <div id="mainTitle">Options</div>
+            <div id="optionsSpot"></div>
+            <div class="mainMenuList">
+                <div onclick="loadSpace(1); saveData(); playSound('Select');">Back</div>
+            </div>
+        </div>
+
+
+
         <span id="fontLoader" style="color:black;">
             <span style="font-family: 'Edu NSW ACT Foundation', cursive;">1</span>
             <span style="font-family: 'Righteous', cursive;">2</span>
@@ -115,6 +143,24 @@ function loadSpace(num) {
         }
     // Specifics
         switch (num) {
+            case 1: // Main Menu
+                // Calculate Total Levels
+                    var levelsTotal = 0;
+                    for (var a=0; a<playlist.length; a++) {
+                        for (var b=0; b<playlist[a].length; b++) {
+                            levelsTotal++;
+                        }
+                        levelsTotal--;
+                    }
+                // Calculate Levels Beaten
+                    var levelsBeaten = 0;
+                    for (var a=0; a<farthestLevel.length; a++) {
+                        levelsBeaten += farthestLevel[a];
+                        levelsBeaten--;
+                    }
+                if (levelsTotal === levelsBeaten) {$('#menuStar').fadeIn(0);}
+                else {$('#menuStar').fadeOut(0);}
+                break;
             case 4: // Level Select
                 var display = `<table id='levelSelectTable'>`;
                 for (var a=1; a<farthestLevel[currentPlaylist]+1; a++) {
@@ -123,7 +169,7 @@ function loadSpace(num) {
                     if (a < farthestLevel[currentPlaylist]) {
                         coloring = 'style="color:yellow;"';
                     }
-                    display += `<tr><td onclick='playGame(${a});' ${coloring}>${a} - ${playlist[currentPlaylist][a].name}</td></tr>`;
+                    display += `<tr><td onclick='playGame(${a}); playSound("Select");' ${coloring}>${a} - ${playlist[currentPlaylist][a].name}</td></tr>`;
                 }
                 display += `</table>`;
                 $('#levelSelectSpot').html(display);
@@ -145,14 +191,13 @@ function loadSpace(num) {
                     if (farthestLevel[a] === playlist[a].length) {
                         coloring = 'style="color:yellow;"';
                     }
-                    display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4);'>${playlist[a][0].name} <span class='small'>(by ${playlist[a][0].author})</span></td></tr>`;
+                    display += `<tr><td ${coloring} onclick='currentPlaylist=${a}; loadSpace(4); playSound("Select");'>${playlist[a][0].name} <span class='small'>(by ${playlist[a][0].author})</span></td></tr>`;
                 }
                 display += `</table>`;
                 $('#playlistSelectSpot').html(display);
                 break;
             case 7: // Statistics
-                var display = '';
-                // Calculate Total Levels
+                // Level Progress
                     var levelsTotal = 0;
                     for (var a=0; a<playlist.length; a++) {
                         for (var b=0; b<playlist[a].length; b++) {
@@ -160,25 +205,45 @@ function loadSpace(num) {
                         }
                         levelsTotal--;
                     }
-                // Calculate Levels Beaten
                     var levelsBeaten = 0;
                     for (var a=0; a<farthestLevel.length; a++) {
                         levelsBeaten += farthestLevel[a];
                         levelsBeaten--;
                     }
-                // Level Progress
-                    display += `Levels Beaten: <span style='color:yellow'>${levelsBeaten}</span>`
-                    display += ` of `;
-                    display += `<span style='color:yellow'>${levelsTotal}</span><br>`;
+                    $('#stat-levelsBeaten').html(levelsBeaten);
+                    $('#stat-levelsTotal').html(levelsTotal);
                 // Cards Played
-                    display += `Cards Played: <span style='color:yellow'>${cardsPlayed}</span><br>`;
-                // Display
-                    $('#informationSpot').html(display)
+                    $('#stat-cardsPlayed').html(cardsPlayed);
+                // Technique Stats
+                    $('#stat-perfectBurns').html(perfectBurns);
+                    $('#stat-bleedChains').html(bleedChains);
+                break;
+            case 8:
+                refreshOptionsScreen();
                 break;
         }
     // General
         $('.mainArea').fadeOut(0);
         $('#area' + num).fadeIn(0);
+};
+
+
+
+function refreshOptionsScreen() {
+    var display = ``;
+    // Sound Effects
+        display += `<span class='optionText' onclick='toggleOption(0);'>Sound Effects: <span style='color:yellow;'>${soundEffects}</span></span><br>`;
+    $('#optionsSpot').html(display);
+};
+function toggleOption(optNum) {
+    switch (optNum) {
+        case 0:
+            if (soundEffects === 'On') {soundEffects = 'Off';}
+            else if (soundEffects === 'Off') {soundEffects = 'On';}
+            break;
+    }
+    refreshOptionsScreen();
+    playSound('Select');
 };
 
 

@@ -5,6 +5,7 @@
 // Game Options
 const handSize = 3;
 const maxSanity = 20;
+const timerYellow = 30;
 
 // Big Variables
 let currentPlaylist;
@@ -109,12 +110,14 @@ function playCard(slot) {
         if (playerStat.feature.sanity === true) {playerStat.sanity--;}
     // Check lock
         if (playerStat.lock[slot] > 0) {
+            playSound('Locked Card');
             $(`#card${slot}`).addClass('unavailableClass');
             setTimeout(function(){
                 $(`#card${slot}`).removeClass('unavailableClass');
             },200);
             return;
         }
+    playSound('Play Card');
     canPlayCard = false;
     cardsPlayed++;
     cardAction(slot, playerHand[slot]);
@@ -196,7 +199,7 @@ function updateTimer() {
         displayTime = `${minutes}:${seconds}`;
     }
     $('#timerSpot').html(displayTime);
-    if (displayTime <= 30) {$('#timerSpot').css('color','yellow');}
+    if (displayTime <= timerYellow) {$('#timerSpot').css('color','yellow');}
     else {$('#timerSpot').css('color','white');}
 };
 function timerLoop() {
